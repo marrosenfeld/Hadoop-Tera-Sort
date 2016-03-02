@@ -14,6 +14,9 @@ sed -i '/<configuration>/a <property>\n<name>dfs.replication</name>\n<value>1</v
 ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa
 cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
 chmod 0600 ~/.ssh/authorized_keys
-cp hadoop-2.7.2/etc/hadoop/mapred-site.xml.template hadoop-2.7.2/etc/hadoop/mapred-site.xml
+cd hadoop-2.7.2/
+bin/hdfs namenode -format
+sbin/start-dfs.sh
+#cp hadoop-2.7.2/etc/hadoop/mapred-site.xml.template hadoop-2.7.2/etc/hadoop/mapred-site.xml
 #sed -i '/<configuration>/a <property>\n<name>mapreduce.framework.name</name>\n<value>yarn</value>\n</property>' hadoop-2.7.2/etc/hadoop/mapred-site.xml
 #sed -i '/<configuration>/a <property>\n<name>yarn.nodemanager.aux-services</name>\n<value>mapreduce_shuffle</value>\n</property>' hadoop-2.7.2/etc/hadoop/yarn-site.xml
