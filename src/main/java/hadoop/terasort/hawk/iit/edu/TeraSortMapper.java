@@ -16,8 +16,8 @@ public class TeraSortMapper extends Mapper<Object, Text, Text, Text> {
 		String[] lineArr = lines.split("\n");
 
 		for (String line : lineArr) {
-			recordKey.set(line.substring(0, 10));
-			recordValue.set(line.substring(10));
+			recordKey.set(key.toString().substring(0, 10));
+			recordValue.set(key.toString().substring(10, 98));
 			context.write(recordKey, recordValue);
 		}
 	}

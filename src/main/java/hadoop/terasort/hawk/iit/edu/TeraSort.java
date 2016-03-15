@@ -7,14 +7,12 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.lib.TotalOrderPartitioner;
-import org.apache.hadoop.mapreduce.InputFormat;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.KeyValueTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.mapreduce.lib.partition.InputSampler;
-import org.apache.hadoop.util.ReflectionUtils;
 
 public class TeraSort {
 	public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException {
@@ -24,8 +22,12 @@ public class TeraSort {
 
 		// Create configuration
 		Configuration conf = new Configuration(true);
-		conf.addResource(new Path("/usr/local/hadoop/etc/hadoop/core-site.xml"));
-		conf.addResource(new Path("/usr/local/hadoop/etc/hadoop/hdfs-site.xml"));
+		// conf.set("mapreduce.input.keyvaluelinerecordreader.key.value.separator",
+		// " ............ ");
+		// conf.addResource(new
+		// Path("/usr/local/hadoop/etc/hadoop/core-site.xml"));
+		// conf.addResource(new
+		// Path("/usr/local/hadoop/etc/hadoop/hdfs-site.xml"));
 
 		long startTime = System.currentTimeMillis();
 
@@ -40,22 +42,17 @@ public class TeraSort {
 		// Setup Partitioner
 		job.setPartitionerClass(TotalOrderPartitioner.class);
 
-		Path inputDir = new Path("/input");
-		Path partitionFile = new Path(inputDir, "partitioning");
+		Path inputDir = new Path("/partitioning");
+		Path partitionFile = new Path(inputDir, "p");
 		TotalOrderPartitioner.setPartitionFile(job.getConfiguration(), partitionFile);
 
 		// Specify key / value
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);
 
-		job.setMapOutputKeyClass(Text.class);
-		job.setMapOutputValueClass(Text.class);
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(Text.class);
-
 		// Input
 		FileInputFormat.addInputPath(job, inputPath);
-		job.setInputFormatClass(TextInputFormat.class);
+		job.setInputFormatClass(KeyValueTextInputFormat.class);
 
 		// Output
 		FileOutputFormat.setOutputPath(job, outputDir);
@@ -67,7 +64,7 @@ public class TeraSort {
 			hdfs.delete(outputDir, true);
 
 		// Execute job
-		Integer numReduceTasks = 2;
+		Integer numReduceTasks = 4;
 		job.setNumReduceTasks(numReduceTasks);
 		double pcnt = 10.0;
 		int numSamples = numReduceTasks;
@@ -77,7 +74,7 @@ public class TeraSort {
 
 		InputSampler.Sampler<Text, Text> sampler = new InputSampler.RandomSampler<Text, Text>(pcnt, numSamples,
 				maxSplits);
-		final InputFormat inf = ReflectionUtils.newInstance(job.getInputFormatClass(), conf);
+
 		InputSampler.writePartitionFile(job, sampler);
 
 		int code = job.waitForCompletion(true) ? 0 : 1;
