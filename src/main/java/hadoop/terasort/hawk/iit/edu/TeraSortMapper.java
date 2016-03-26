@@ -15,6 +15,7 @@ public class TeraSortMapper extends Mapper<Object, Text, Text, Text> {
 		String lines = value.toString();
 		String[] lineArr = lines.split("\n");
 
+		// get one record per line
 		for (String line : lineArr) {
 			recordKey.set(key.toString().substring(0, 10));
 			recordValue.set(key.toString().substring(10, 98));

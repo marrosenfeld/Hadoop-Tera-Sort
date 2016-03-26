@@ -22,12 +22,6 @@ public class TeraSort {
 
 		// Create configuration
 		Configuration conf = new Configuration(true);
-		// conf.set("mapreduce.input.keyvaluelinerecordreader.key.value.separator",
-		// " ............ ");
-		// conf.addResource(new
-		// Path("/usr/local/hadoop/etc/hadoop/core-site.xml"));
-		// conf.addResource(new
-		// Path("/usr/local/hadoop/etc/hadoop/hdfs-site.xml"));
 
 		long startTime = System.currentTimeMillis();
 
