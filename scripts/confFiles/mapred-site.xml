@@ -19,7 +19,7 @@
 <configuration>
 <property> 
       <name>mapred.jobtracker.address</name> 
-      <value>hdfs://ec2-52-33-173-36.us-west-2.compute.amazonaws.com:8021</value> 
+      <value>hdfs://ec2-54-174-101-80.compute-1.amazonaws.com:8021</value> 
    </property> 
 <property> 
       <name>mapreduce.framework.name</name> 
@@ -27,11 +27,11 @@
    </property>
 <property>
 	<name>mapreduce.job.maps</name>
-	<value>4</value>
+	<value>2</value>
 </property>
 <property>
         <name>mapreduce.job.reduces</name>
-        <value>4</value>
+        <value>2</value>
 </property>
 
 <!--<property>

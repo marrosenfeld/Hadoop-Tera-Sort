@@ -19,7 +19,7 @@
 <configuration>
     <property>
         <name>fs.default.name</name>
-        <value>hdfs://ec2-52-33-173-36.us-west-2.compute.amazonaws.com:8020</value>
+        <value>hdfs://ec2-54-174-101-80.compute-1.amazonaws.com:8020</value>
     </property>
 	<property>
 <name>hadoop.tmp.dir</name>

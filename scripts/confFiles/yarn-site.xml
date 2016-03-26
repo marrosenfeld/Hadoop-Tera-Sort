@@ -19,39 +19,23 @@
     	</property>
 	<property>
                 <name>yarn.resourcemanager.scheduler.address</name>
-		<value>ec2-52-33-173-36.us-west-2.compute.amazonaws.com:8030</value>
+		<value>ec2-54-174-101-80.compute-1.amazonaws.com:8030</value>
 	</property>
 	<property>
                 <name>yarn.resourcemanager.address</name>
-                <value>ec2-52-33-173-36.us-west-2.compute.amazonaws.com:8032</value>
+                <value>ec2-54-174-101-80.compute-1.amazonaws.com:8032</value>
         </property>
 	<property>
                 <name>yarn.resourcemanager.webapp.address</name>
-                <value>ec2-52-33-173-36.us-west-2.compute.amazonaws.com:8088</value>
+                <value>ec2-54-174-101-80.compute-1.amazonaws.com:8088</value>
         </property>
 	<property>
                 <name>yarn.resourcemanager.resource-tracker.address</name>
-                <value>ec2-52-33-173-36.us-west-2.compute.amazonaws.com:8031</value>
+                <value>ec2-54-174-101-80.compute-1.amazonaws.com:8031</value>
         </property>
 	<property>
                 <name>yarn.resourcemanager.admin.address</name>
-                <value>ec2-52-33-173-36.us-west-2.compute.amazonaws.com:8033</value>
+                <value>ec2-54-174-101-80.compute-1.amazonaws.com:8033</value>
         </property>
-<!-- Site specific YARN configuration properties -->
-<!--<property>
-<name>yarn.nodemanager.resource.memory-mb</name>
-<value>20960</value>
-</property>
-
-
-<property>
-<name>yarn.scheduler.minimum-allocation-mb</name>
-<value>2048</value>
-</property>
-
-<property>
-<name>yarn.nodemanager.vmem-pmem-ratio</name>
-<value>2.1</value>
-</property>-->
 
 </configuration>
